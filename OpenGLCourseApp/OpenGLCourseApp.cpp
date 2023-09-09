@@ -43,4 +43,28 @@ int main()
 
     // Allow modern extension features
     glewExperimental = GL_TRUE;
+
+    if (glewInit() != GLEW_OK) {
+        std::cout << "GLEW Initialization Failed\n";
+        glfwDestroyWindow(mainWindow);
+        glfwTerminate();
+        return 1;
+    }
+
+    // Setup Viewport Size
+    glViewport(0, 0, bufferWidth, bufferHeight);
+
+    // Loop Until Window Closed
+    while (!glfwWindowShouldClose(mainWindow)) {
+        // Get and Handle User Input Events
+        glfwPollEvents();
+
+        // Clear Window
+        glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glfwSwapBuffers(mainWindow);
+    }
+
+    return 0;
 }
